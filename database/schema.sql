@@ -17,12 +17,13 @@ CREATE TABLE assignments (
 -- Stores each troubleshooting session
 CREATE TABLE troubleshooting_runs (
     run_id SERIAL PRIMARY KEY,
-    assignment_id BIGINT REFERENCES assingments(assignment_id),
+    assignment_id BIGINT REFERENCES assignments(assignment_id),
     created_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE troubleshooting_reports (
     report_id SERIAL PRIMARY KEY,
+    run_id INTEGER REFERENCES troubleshooting_runs(run_id),
     assignment_id BIGINT REFERENCES assignments(assignment_id),
     issue TEXT NOT NULL,
     severity VARCHAR(50),
